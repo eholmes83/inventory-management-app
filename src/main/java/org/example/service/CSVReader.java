@@ -52,4 +52,32 @@ public class CSVReader {
             e.printStackTrace();
         }
     }
+
+    public void readProductsFromFileUsingBuilder(Path filePath) {
+        try {
+
+            List<String> data = Files.readAllLines(filePath);
+            ArrayList<Product> products = new ArrayList<Product>();
+
+            data.stream()
+                    .skip(1)
+                    .forEach((String lines) -> {
+
+                        String[] productData = lines.split(",");
+
+                        products.add(Product.builder()
+                                .id(Integer.parseInt(productData[0]))
+                                .name(productData[1])
+                                .quantity(Integer.parseInt(productData[2]))
+                                .price(Double.parseDouble(productData[3]))
+                                .build());
+            });
+
+            ReportGenerator reportGenerator = new ReportGenerator();
+            reportGenerator.generateLowInventoryReport(products);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

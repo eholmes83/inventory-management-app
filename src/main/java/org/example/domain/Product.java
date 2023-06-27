@@ -6,13 +6,51 @@ public class Product {
     private Integer quantity;
     private Double price;
 
+    // Things to try
+        // Use builder method to create Product object -- done
+        // Add unit tests for methods in CSVReader and ReportGenerator
+
     public Product() {}
 
-    public Product(Integer id, String name, Integer quantity, Double price) {
-        this.id = id;
-        this.name = name;
-        this.quantity = quantity;
-        this.price = price;
+    public Product(Builder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.quantity = builder.quantity;
+        this.price = builder.price;
+    }
+
+    public static Builder builder() { return new Builder(); }
+
+    public static class Builder {
+
+        private Integer id;
+        private String name;
+        private Integer quantity;
+        private Double price;
+
+        public Builder id(Integer id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder quantity(Integer quantity) {
+            this.quantity = quantity;
+            return this;
+        }
+
+        public Builder price(Double price) {
+            this.price = price;
+            return this;
+        }
+
+        public Product build() {
+            return new Product(this);
+        }
     }
 
     public Integer getId() {

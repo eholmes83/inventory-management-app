@@ -10,5 +10,10 @@ public class Main {
         CSVReader csvReader = CSVReader.getInstance();
         csvReader.readProductsFromFile(Path.of("product-inventory.txt"));
 
+        System.out.println("==============  USING BUILDER ARCHITECTURE ============");
+
+        CSVReader csvReader1 = CSVReader.getInstance();
+        csvReader1.readProductsFromFileUsingBuilder(Path.of("product-inventory.txt"));
+
     }
 }
